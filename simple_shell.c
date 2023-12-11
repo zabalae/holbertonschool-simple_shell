@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "main.h"
 
 #define MAX_INPUT_SIZE 1024
 #define MAX_ARGS 64
@@ -15,6 +16,7 @@
 void execute_command(char *args[])
 {
 pid_t pid = fork();
+int status;
 
 if (pid == -1)
 {
@@ -30,7 +32,6 @@ exit (EXIT_FAILURE);
 }
 else
 {
-int status;
 waitpid(pid, &status, 0);
 
 if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
@@ -46,7 +47,8 @@ fprintf(stderr, "Error: Command not found\n");
 void print_environment()
 {
 extern char **environ;
-for (char **env = environ; *env != NULL; env++)
+char **env;
+for (env = environ; *env != NULL; env++)
 {
 printf("%s\n", *env);
 }
@@ -60,7 +62,8 @@ int main(void)
 {
 char input[MAX_INPUT_SIZE];
 char *args[MAX_ARGS];
-
+char *token;
+int i;
 while (1)
 {
 printf("simple_shell> ");
@@ -81,8 +84,7 @@ exit(EXIT_FAILURE);
 }
 input[strcspn(input, "\n")] = '\0';
 
-char *token = strtok(input, " ");
-int i = 0;
+strtok(input, " ");
 
 while (token != NULL && i < MAX_ARGS - 1)
 {
