@@ -63,6 +63,7 @@ int main(void)
 char input[MAX_INPUT_SIZE];
 char *args[MAX_ARGS];
 char *token;
+int i;
 while (1)
 {
 printf("simple_shell> ");
@@ -84,7 +85,6 @@ exit(EXIT_FAILURE);
 input[strcspn(input, "\n")] = '\0';
 
 strtok(input, " ");
-int i = 0;
 
 while (token != NULL && i < MAX_ARGS - 1)
 {
