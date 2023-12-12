@@ -10,5 +10,6 @@
 void execute_comm(char *cmd, char *self);
 char *getInput(void);
 void print_environment(void);
+void execute_command(char *args[]);
 
 #endif
