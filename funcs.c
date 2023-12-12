@@ -26,13 +26,13 @@ char *getInput(void)
 	return (input);
 }
 /**
-* execute_command - execute command base on usr input
+* execute_comm - execute command base on usr input
 * @cmd: recive the command
 * @self: main argv[0] for the error msg
 *
 * Return: void, doesnt return
 */
-void execute_command(char *cmd, char *self)
+void execute_comm(char *cmd, char *self)
 {
 	char *cmd_args[3];
 	pid_t pid;
