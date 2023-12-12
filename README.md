@@ -124,3 +124,94 @@ Simple shell 0.3 +
 Simple shell 0.4 +
 
 - Implement the env built-in, that prints the current environment
+
+#### 7. What happens when you type `ls -l *.c` in the shell
+
+Write a blog post describing step by step what happens when you type ls -l *.c and hit Enter in a shell. Try to explain every step you know of, going in as much details as you can, give examples and draw diagrams when needed. You should merge your previous knowledge of the shell with the specifics of how it works under the hoods (including syscalls).
+
+- Have at least one picture, at the top of the blog post
+- Publish your blog post on Medium or LinkedIn
+- Share your blog post at least on LinkedIn
+- Only one blog post by team
+- The blog post must be done and published before the first deadline (it will be part of the manual review)
+- Please, remember that these blogs must be written in English to further your technical ability in a variety of settings
+
+#### 8. Test suite
+
+Contribute to a test suite for your shell.
+
+This is a task shared by everyone in the class.
+
+- Every team (who contributed) will get the same score for this task (The repository owner will not get more points)
+- You have to be pro-active and agree on one and unique repository to use for the test suite
+- Please provide the link to the repository you contributed to
+- Your contribution must be relevant (Correcting typos is nice and always appreciated on the open source sphere, but we won’t consider this a contribution at this point, unless it fixes a bug)
+Guidelines for your test suite repository:
+
+- The test suite should cover every tasks from 0. to 20.
+- The test suite should cover every regular cases (many different examples) and possible edge cases
+- The entire class should work on the same test suite. Use only one repository (don’t forget the README.md file)
+- Start adding tests ASAP and not just before the deadline in order to help everyone from day 0
+- You can take (or fork) inspiration from this example, but it is not mandatory to follow this format/way
+- Adopt a style and be consistent. You can, for example, follow this style guide. If you choose a style that already exists, add it to the README.md in a style section. If you write your own, create a Wiki page attached to the project and refer to it in the 
+  README.md style section.
+- If you choose to use this code, make sure to update the style accordingly
+- You should have an AUTHORS file, listing all individuals having contributed content to the repository.
+
+#### 9. Simple shell 0.1.1
+
+Simple shell 0.1 +
+
+- Write your own getline function
+- Use a buffer to read many chars at once and call the least possible the read system call
+- You will need to use static variables
+- You are not allowed to use getline
+You don’t have to:
+
+- be able to move the cursor
+
+#### 10. Simple shell 0.2.1
+
+Simple shell 0.2 +
+
+- You are not allowed to use strtok
+
+#### 11. Simple shell 0.4.1
+
+Simple shell 0.4 +
+
+- handle arguments for the built-in exit
+- Usage: exit status, where status is an integer used to exit the shell
+
+#### 12. Simple shell 0.4.2
+
+Simple shell 0.4 +
+
+- Handle Ctrl+C: your shell should not quit when the user inputs ^C
+
+#### 13. setenv, unsetenv
+
+Simple shell 1.0 +
+
+Implement the setenv and unsetenv builtin commands
+
+setenv
+- Initialize a new environment variable, or modify an existing one
+- Command syntax: setenv VARIABLE VALUE
+- Should print something on stderr on failure
+unsetenv
+- Remove an environment variable
+- Command syntax: unsetenv VARIABLE
+- Should print something on stderr on failure
+
+#### 14. cd
+
+Simple shell 1.0 +
+
+Implement the builtin command cd:
+
+- Changes the current directory of the process.
+- Command syntax: cd [DIRECTORY]
+- If no argument is given to cd the command must be interpreted like cd $HOME
+- You have to handle the command cd -
+- You have to update the environment variable PWD when you change directory
