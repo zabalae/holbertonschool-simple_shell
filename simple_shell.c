@@ -44,7 +44,7 @@ fprintf(stderr, "Error: Command not found\n");
 /**
 * Prints the current environment variables.
 */
-void print_environment()
+void print_environment(void)
 {
 extern char **environ;
 char **env;
@@ -57,6 +57,7 @@ printf("%s\n", *env);
 /**
 * Main function for the simple shell.
 * Reads user input, tokenizes it, and executes commands.
+* @return Returns 0 on successful execution.
 */
 int main(void)
 {
@@ -83,8 +84,8 @@ exit(EXIT_FAILURE);
 }
 }
 input[strcspn(input, "\n")] = '\0';
-
-strtok(input, " ");
+i = 0;
+token = strtok(input, " ");
 
 while (token != NULL && i < MAX_ARGS - 1)
 {
