@@ -32,7 +32,7 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-void execute_comm(char *cmd, char *self)
+void execute_command(char *cmd, char *self)
 {
 	char *cmd_args[3];
 	pid_t pid;
