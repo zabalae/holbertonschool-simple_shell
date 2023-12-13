@@ -7,8 +7,8 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-void execute(char *cmd, char *self);
+void execute(char *cmd, char *self, char *envp[]);
 char *getInput(void);
-void print_enviroment(void);
+void print_enviroment(char *envp[]);
 
 #endif
