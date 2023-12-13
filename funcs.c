@@ -72,7 +72,7 @@ void execute(char *cmd, char *self)
 			fflush(stdout);
 			free(cmd);
 			exit(EXIT_FAILURE);
-		}
+    }
 		else
 		{
 			int stat;
