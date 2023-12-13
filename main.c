@@ -9,27 +9,24 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	char *input = NULL, *prevInput = NULL;
-	(void)argc;
+	char *input = NULL;
 
-	do {/*infinit loop till exit is input*/
-		if (isatty(STDIN_FILENO))
-			printf("$ ");
-		input = getInput();/*use getline for input*/
+	while (1)
+	{
+		printf("$ ");
+		input = getInput();
 
-		if (input == NULL)
+		if (*strcmp(input, "exit") == 0)
 		{
-			perror("getline");
-			free(prevInput);
+			free(input);
 			break;
 		}
-		if (strcmp(input, "exit") != 0)
-		{
-			execute(input, argv[0], envp);
-		}
-		free(prevInput);/*deals with leaks*/
-		prevInput = input;
-	} while (input != NULL && strcmp(input, "exit") != 0);
+
+		execute(input, argv[0], envp);
+		free(input);
+
+	}
+
 	free(input);/*getline allocate memory, needs free*/
 	return (0);
 }
