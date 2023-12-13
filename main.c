@@ -24,8 +24,10 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			execute(input, argv[0], envp);
 		}
+
+		free(input);
 	} while (strcmp(input, "exit") != 0);
 	free(prevInput);
-	free(input);/*getline allocate memory, needs free*/
+
 	return (0);
 }
