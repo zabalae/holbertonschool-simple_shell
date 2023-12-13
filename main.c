@@ -15,6 +15,7 @@ int main(int argc, char *argv[], char *envp[])
 	do {/*infinit loop till exit is input*/
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
+
 		free(prevInput);
 		prevInput = input;
 
@@ -24,6 +25,7 @@ int main(int argc, char *argv[], char *envp[])
 			execute(input, argv[0], envp);
 		}
 	} while (strcmp(input, "exit") != 0);
+	free(prevInput);
 	free(input);/*getline allocate memory, needs free*/
 	return (0);
 }
