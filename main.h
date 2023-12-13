@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-void execute(char *cmd, char *self);
+void execute(char *self);
 char *getInput(void);
 void print_environment(void);
 
