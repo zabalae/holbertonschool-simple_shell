@@ -23,7 +23,6 @@ int main(int argc, char *argv[], char *envp[])
 		if (input != NULL && strcmp(input, "exit") != 0)
 		{
 			execute(input, argv[0], envp);
-			free(input);
 		}
 
 	} while (input != NULL && strcmp(input, "exit") != 0);
