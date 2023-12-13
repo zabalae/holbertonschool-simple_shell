@@ -34,7 +34,8 @@ char *getInput(void)
 */
 void execute(char *cmd, char *self)
 {
-	char *cmd_args[3];
+	int i = 0;
+	char *cmd_args[259];
 	pid_t pid;
 
 	if (strcmp(cmd, "env") == 0)
@@ -46,6 +47,17 @@ void execute(char *cmd, char *self)
 		return;
 	else
 	{
+		cmd_args[i] = strtok(cmd, " ");
+		while (cmd_args[i] != NULL)
+		{
+			i++;
+			if (i >= 258)
+			{
+				printf("Command Fail, Too many arguments. Max 258.\n");
+				return;
+			}
+			cmd_args[i] = strtok(NULL, " ");
+		}
 		pid = fork();
 		if (pid == -1)
 		{
@@ -54,16 +66,13 @@ void execute(char *cmd, char *self)
 		}
 		if (pid == 0)/*child process*/
 		{
-			cmd_args[0] = cmd;
-			cmd_args[1] = NULL;
-
-			execve(cmd, cmd_args, NULL);
+			execve(cmd_args[0], cmd_args, NULL);
 			/*if command doesnt exist it will continue, therefore, print*/
 			printf("%s: 1: %s: not found\n", self, cmd);
 			fflush(stdout);
 			free(cmd);
 			exit(EXIT_FAILURE);
-		}
+    }
 		else
 		{
 			int stat;
@@ -77,7 +86,7 @@ void execute(char *cmd, char *self)
 *
 * Return: void, doesnt return
 */
-void print_environment(void)
+void print_enviroment(void)
 {
 	char *env;
 
