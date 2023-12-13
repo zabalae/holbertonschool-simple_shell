@@ -58,8 +58,6 @@ void execute(char *cmd, char *self, char *envp[])
 			cmd_args[i] = strtok(NULL, " ");
 		}
 
-		free(cmd);
-
 		pid = fork();
 		if (pid == -1)
 		{
