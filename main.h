@@ -1,7 +1,14 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
-void execute_command(char *args[]);
-void print_environment(void);
+void execute(char *cmd, char *self, char *envp[]);
+char *getInput(void);
+void print_enviroment(char *envp[]);
 
 #endif
