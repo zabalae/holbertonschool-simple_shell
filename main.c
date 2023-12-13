@@ -20,13 +20,14 @@ int main(int argc, char *argv[], char *envp[])
 		prevInput = input;
 
 		input = getInput();/*use getline for input*/
-		if (strcmp(input, "exit") != 0)
+		if (input != NULL && strcmp(input, "exit") != 0)
 		{
 			execute(input, argv[0], envp);
+			free(input);
 		}
 
-		free(input);
-	} while (strcmp(input, "exit") != 0);
+	} while (input != NULL && strcmp(input, "exit") != 0);
+
 	free(prevInput);
 
 	return (0);
