@@ -3,6 +3,7 @@
  * main - starts or main entry of program
  * @argc: recive argument count
  * @argv: recive argument vector
+ * @envp: revice enviroment variables
  *
  * Return: 0 if function finish propertly
  */

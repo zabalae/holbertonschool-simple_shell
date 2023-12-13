@@ -29,6 +29,7 @@ char *getInput(void)
 * execute - execute command base on usr input
 * @cmd: recive the command
 * @self: main argv[0] for the error msg
+* @envp: recive enviroment variables
 *
 * Return: void, doesnt return
 */
@@ -75,7 +76,8 @@ void execute(char *cmd, char *self, char *envp[])
 	}
 }
 /**
-* print_enviroment - for env command/ enviroment
+* print_enviroment - for env command enviroment
+* @envp: recive enviroment variables
 *
 * Return: void, doesnt return
 */
