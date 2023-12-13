@@ -9,6 +9,6 @@
 
 void execute(char *cmd, char *self);
 char *getInput(void);
-void print_environment(void);
+void print_enviroment(void);
 
 #endif
