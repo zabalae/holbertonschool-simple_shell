@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 		input = getInput();/*use getline for input*/
 		if (input != NULL && strcmp(input, "exit") != 0)
 		{
-			execute(input, argv[0]);
+			execute(argv[0]);
 		}
 	} while (input == NULL || (input != NULL && strcmp(input, "exit") != 0));
 
