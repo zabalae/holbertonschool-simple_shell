@@ -57,6 +57,9 @@ void execute(char *cmd, char *self, char *envp[])
 			}
 			cmd_args[i] = strtok(NULL, " ");
 		}
+
+		free(cmd);
+
 		pid = fork();
 		if (pid == -1)
 		{
@@ -68,7 +71,6 @@ void execute(char *cmd, char *self, char *envp[])
 			execve(cmd_args[0], cmd_args, envp);
 			printf("%s: 1: %s: not found\n", self, cmd);
 			fflush(stdout);
-			free(cmd);
 			exit(EXIT_FAILURE);
 		}
 		else
