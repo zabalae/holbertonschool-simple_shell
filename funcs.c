@@ -42,28 +42,34 @@ void execute(char *cmd, char *self)
 		print_enviroment();
 		return;
 	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	if (pid == 0)
-	{
-		cmd_args[0] = cmd;
-		cmd_args[1] = NULL;
-
-		execve(cmd, cmd_args, NULL);
-		/*if command doesnt exist it will continue, therefore, print*/
-		printf("%s: 1: %s: not found\n", self, cmd);
-		fflush(stdout);
+	else if(strcmp(cmd, "exit") == 0)
 		return;
-	}
 	else
 	{
-		int stat;
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+		if (pid == 0)/*child process*/
+		{
+			cmd_args[0] = cmd;
+			cmd_args[1] = NULL;
 
-		wait(&stat);
+			execve(cmd, cmd_args, NULL);
+			/*if command doesnt exist it will continue, therefore, print*/
+			printf("%s: 1: %s: not found\n", self, cmd);
+			fflush(stdout);
+			free(cmd);
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			int stat;
+
+			wait(&stat);
+		}
 	}
 }
 /**
