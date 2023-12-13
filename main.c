@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * main - starts or main entry of program
+ * @argc: recive argument count
+ * @argv: recive argument vector
+ *
+ * Return: 0 if function finish propertly
+ */
 int main(int argc, char *argv[])
 {
 	char *input = NULL, *prevInput = NULL;

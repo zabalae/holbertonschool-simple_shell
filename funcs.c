@@ -26,7 +26,7 @@ char *getInput(void)
 	return (input);
 }
 /**
-* execute_comm - execute command base on usr input
+* execute - execute command base on usr input
 * @cmd: recive the command
 * @self: main argv[0] for the error msg
 *
@@ -43,8 +43,6 @@ void execute(char *cmd, char *self)
 		print_enviroment();
 		return;
 	}
-	else if(strcmp(cmd, "exit") == 0)
-		return;
 	else
 	{
 		cmd_args[i] = strtok(cmd, " ");
@@ -67,18 +65,13 @@ void execute(char *cmd, char *self)
 		if (pid == 0)/*child process*/
 		{
 			execve(cmd_args[0], cmd_args, NULL);
-			/*if command doesnt exist it will continue, therefore, print*/
 			printf("%s: 1: %s: not found\n", self, cmd);
 			fflush(stdout);
 			free(cmd);
 			exit(EXIT_FAILURE);
-    }
-		else
-		{
-			int stat;
-
-			wait(&stat);
 		}
+		else
+			wait(NULL);
 	}
 }
 /**
