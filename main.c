@@ -15,19 +15,14 @@ int main(int argc, char *argv[], char *envp[])
 	do {/*infinit loop till exit is input*/
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
-
-		free(prevInput);
-		prevInput = input;
-
 		input = getInput();/*use getline for input*/
-		if (input != NULL && strcmp(input, "exit") != 0)
+		if (strcmp(input, "exit") != 0)
 		{
 			execute(input, argv[0], envp);
 		}
-
-	} while (input != NULL && strcmp(input, "exit") != 0);
-
-	free(prevInput);
-
+		free(prevInput);/*deals with leaks*/
+		prevInput = input;
+	} while (strcmp(input, "exit") != 0);
+	free(input);/*getline allocate memory, needs free*/
 	return (0);
 }
