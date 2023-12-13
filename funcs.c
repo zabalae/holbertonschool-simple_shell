@@ -32,7 +32,7 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-void execute(char *cmd, char *self)
+void execute(char *self)
 {
 	char *cmd_args[10];
 	char *token;
