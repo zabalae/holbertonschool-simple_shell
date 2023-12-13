@@ -7,7 +7,7 @@
 char *getInput(void)
 {
 	char *input = NULL;
-	size_t size = 32, len;
+	size_t size = 0, len;
 	ssize_t errCheck;
 
 	errCheck = getline(&input, &size, stdin);
@@ -34,15 +34,21 @@ char *getInput(void)
 */
 void execute(char *cmd, char *self)
 {
-	char *cmd_args[3];
+	char *cmd_args[10];
+	char *token;
 	pid_t pid;
 
-	if (strcmp(cmd, "env") == 0)
+	int x = 0;
+
+	while (token != NULL && x < 9)
 	{
-		print_environment();
-		return;
+		cmd_args[x++] = token;
+		token = strtok(NULL, " ");
 	}
+	cmd_args[x] = NULL;
+
 	pid = fork();
+
 	if (pid == -1)
 	{
 		perror("fork");
@@ -50,20 +56,17 @@ void execute(char *cmd, char *self)
 	}
 	if (pid == 0)
 	{
-		cmd_args[0] = cmd;
-		cmd_args[1] = NULL;
-
-		execve(cmd, cmd_args, NULL);
+		execvp(cmd_args[0], cmd_args);
 		/*if command doesnt exist it will continue, therefore, print*/
-		printf("%s: 1: %s: not found\n", self, cmd);
+		printf("%s: 1: %s: not found\n", self, cmd_args[0]);
 		fflush(stdout);
-		return;
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		int stat;
+		int status;
 
-		wait(&stat);
+		waitpid(pid, &status, 0);
 	}
 }
 /**
