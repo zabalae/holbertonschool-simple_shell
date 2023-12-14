@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	char *input = NULL, *prevInput = NULL;
+	char *input = NULL;
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
@@ -19,10 +19,11 @@ int main(int argc, char *argv[], char *envp[])
 		if (strcmp(input, "exit") != 0)
 		{
 			execute(input, argv[0], envp);
+			free(input);
 		}
-		free(prevInput);/*deals with leaks*/
-		prevInput = input;
-	} while (strcmp(input, "exit") != 0);
+		else
+			break;
+	} while (1);
 	free(input);/*getline allocate memory, needs free*/
 	return (0);
 }
