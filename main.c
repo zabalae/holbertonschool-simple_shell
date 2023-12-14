@@ -16,13 +16,18 @@ int main(int argc, char *argv[], char *envp[])
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
 		input = getInput();/*use getline for input*/
-		if (strcmp(input, "exit") != 0)
+		if (input != NULL)
 		{
-			execute(input, argv[0], envp);
-			free(input);
+			if (strcmp(input, "exit") != 0)
+			{
+				execute(input, argv[0], envp);
+				free(input);
+			}
+			else
+				break;
 		}
 		else
-			break;
+			printf("Fail, NULL input");
 	} while (1);
 	free(input);/*getline allocate memory, needs free*/
 	return (0);
