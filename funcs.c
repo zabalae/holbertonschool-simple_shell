@@ -1,4 +1,5 @@
 #include "main.h"
+#define ARGS_SIZE 259
 /**
 * getInput - recive the user input
 *
@@ -7,7 +8,7 @@
 char *getInput(void)
 {
 	char *input = NULL;
-	size_t size = 32, len;
+	size_t size = 0, len;
 	ssize_t errCheck;
 
 	errCheck = getline(&input, &size, stdin);
@@ -36,7 +37,7 @@ char *getInput(void)
 void execute(char *cmd, char *self, char *envp[])
 {
 	int i = 0;
-	char *cmd_args[259];
+	char *cmd_args[ARGS_SIZE];
 	pid_t pid;
 
 	if (strcmp(cmd, "env") == 0)
@@ -71,8 +72,9 @@ void execute(char *cmd, char *self, char *envp[])
 				execve(cmd_args[0], cmd_args, envp);
 				printf("%s: 1: %s: not found\n", self, cmd);
 				fflush(stdout);
+				_exit(EXIT_FAILURE);
 			}
-			exit(EXIT_FAILURE);
+			_exit(EXIT_FAILURE);
 		}
 		else
 			wait(NULL);
