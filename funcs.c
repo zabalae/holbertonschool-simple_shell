@@ -16,7 +16,7 @@ char *getInput(void)
 		if (isatty(STDIN_FILENO))
 		{
 			perror("getline");
-			exit(EXIT_FAILURE);
+			return (NULL);
 		}
 		exit(EXIT_SUCCESS);
 	}
@@ -66,9 +66,12 @@ void execute(char *cmd, char *self, char *envp[])
 		}
 		if (pid == 0)/*child process*/
 		{
-			execve(cmd_args[0], cmd_args, envp);
-			printf("%s: 1: %s: not found\n", self, cmd);
-			fflush(stdout);
+			if (cmd_args[0] != NULL)
+			{
+				execve(cmd_args[0], cmd_args, envp);
+				printf("%s: 1: %s: not found\n", self, cmd);
+				fflush(stdout);
+			}
 			exit(EXIT_FAILURE);
 		}
 		else
