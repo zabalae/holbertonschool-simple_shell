@@ -63,7 +63,7 @@ void execute(char *cmd, char *self, char *envp[])
 		{
 			execve(path_check, cmd_args, envp);
 			free(path_check);
-			_exit(EXIT_FAILURE);
+			_exit(2);
 		}
 		else
 		{
