@@ -7,9 +7,8 @@
 char *getInput(void)
 {
 	char *input = NULL;
-	size_t size = 0, len;
+	size_t size = 0, len, x, allSpaces = 1;
 	ssize_t errCheck;
-	int x, allSpaces = 1;
 
 	errCheck = getline(&input, &size, stdin);
 	if (errCheck == -1)
