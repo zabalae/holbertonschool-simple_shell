@@ -33,6 +33,11 @@ int main(int argc, char *argv[], char *envp[])
 					print_enviroment(envp);
 				free(input);
 			}
+			else if (strlen(input) == 4)
+			{
+				free(input);
+				break;
+			}
 			else
 			{
 				free(input);
