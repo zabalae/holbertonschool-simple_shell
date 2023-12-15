@@ -20,7 +20,7 @@ char *getInput(void)
 			return (NULL);
 		}
 		free(input);
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	len = strlen(input);
 	if (len > 0 && input[len - 1] == '\n')
