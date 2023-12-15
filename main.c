@@ -20,10 +20,6 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			if (strcmp(input, "exit") != 0)
 			{
-				if (getenv("PATH") == NULL || strlen(getenv("PATH")) == 0)
-				{
-					setenv("PATH", "/usr/bin:/bin", 1);
-				}
 				execute(input, argv[0], envp);
 				free(input);
 			}
