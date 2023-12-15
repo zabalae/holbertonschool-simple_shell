@@ -20,7 +20,7 @@ char *getInput(void)
 			return (NULL);
 		}
 		free(input);
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 	len = strlen(input);
 	if (len > 0 && input[len - 1] == '\n')
@@ -72,7 +72,7 @@ void execute(char *cmd, char *self, char *envp[])
 		}
 	}
 	else
-		dprintf(2, "%s: 1: %s: not found\n", self, cmd);
+		fprintf(stderr, "%s: 1: %s: not found\n", self, cmd);
 }
 /**
 * print_enviroment - for env command enviroment
