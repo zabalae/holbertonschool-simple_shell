@@ -31,10 +31,6 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else
 			printf("Fail, NULL input");
-		if (input == NULL)
-		{
-			free(input);
-		}
 	} while (1);
 	/*free(input);*getline allocate memory, needs free*/
 	return (0);
