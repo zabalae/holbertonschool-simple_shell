@@ -1,5 +1,4 @@
 #include "main.h"
-#define ARGS_SIZE 259
 /**
 * getInput - recive the user input
 *
