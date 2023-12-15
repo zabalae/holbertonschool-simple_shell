@@ -24,11 +24,14 @@ int main(int argc, char *argv[], char *envp[])
 				free(input);
 			}
 			else
+			{
+				free(input);
 				break;
+			}
 		}
 		else
 			printf("Fail, NULL input");
 	} while (1);
-	free(input);/*getline allocate memory, needs free*/
+	/*free(input);*getline allocate memory, needs free*/
 	return (0);
 }
