@@ -34,8 +34,7 @@ int main(int argc, char *argv[], char *envp[])
 			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
 			{
 				free(cmd);
-				exit(0);
-				/*break;*/
+				break;
 			}
 			else
 			{
