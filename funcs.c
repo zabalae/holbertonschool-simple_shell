@@ -96,6 +96,13 @@ char *validCommand(char *cmd)
 {
 	char *path = getenv("PATH"), *token, *cmd_path, *path_cpy = NULL;
 
+	if (strchr(cmd, '/') != NULL)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (strdup(cmd));
+		else
+			return (NULL);
+	}
 	if (path != NULL)
 	{
 		path_cpy = strdup(path);
