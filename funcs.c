@@ -42,10 +42,13 @@ void execute(char *cmd, char *self, char *envp[])
 	pid_t pid;
 
 	cmd_args[0] = strtok(cmd, " ");
-	while (cmd_args[i] != NULL && i < ARGS_SIZE - 1)
+	if (cmd_args[0] != NULL)
 	{
-		i++;
-		cmd_args[i] = strtok(NULL, " ");
+		while (cmd_args[i] != NULL && i < ARGS_SIZE - 1)
+		{
+			i++;
+			cmd_args[i] = strtok(NULL, " ");
+		}
 	}
 	path_check = validCommand(cmd_args[0]);
 	if (path_check != NULL)
@@ -96,6 +99,8 @@ char *validCommand(char *cmd)
 {
 	char *path = getenv("PATH"), *token, *cmd_path, *path_cpy = NULL;
 
+	if (cmd == NULL)
+		return (NULL);
 	if (strchr(cmd, '/') != NULL)
 	{
 		if (access(cmd, X_OK) == 0)
@@ -128,4 +133,23 @@ char *validCommand(char *cmd)
 	}
 	free(path_cpy);
 	return (NULL);
+}
+/**
+ * spaceChecker - checks for white spaces
+ * @cmd: usrInput to check for spaces
+ *
+ * Return: 1 if only whitespaces, 0 otherwise
+ */
+int spaceChecker(char *cmd)
+{
+	int i;
+
+	if (cmd == NULL || cmd[0] == '\0')
+		return (1);
+	for (i = 0; cmd[i] != '\0'; i++)
+	{
+		if (cmd[i] != ' ')
+			return (0);
+	}
+	return (1);
 }
