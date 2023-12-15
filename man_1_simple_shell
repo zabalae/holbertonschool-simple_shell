@@ -1,57 +1,53 @@
-MAN SIMPLE_SHELL
+.\" Man page for simple_shell.
+.TH man 3 "15 December 2023" "1.0" "simple_shell man page"
 
-NAME:
-      simple_shell - A Simple Shell Implementation
+.SH NAME
+simple_shell \- A Simple Shell Implementation
 
-DESCRIPTION:
-       simple_shell is a basic shell program designed to provide a simple command-line
-       interface for executing commands. it includes features commonly found in unix-like
-       shells, such as command execution, environment variable display, and basic error handling.
+.SH DESCRIPTION
+simple_shell is a basic shell program designed to provide a simple command-line interface for executing commands. it includes features commonly found in unix-like shells, such as command execution, environment variable display, and basic error handling.
 
-OPTIONS:
-       simple_shell does not currently support any command-line options.
+.SH OPTIONS
+simple_shell does not currently support any command-line options.
 
-COMMANDS:
-       The simple_shell supports the following commands:
+.SH COMMANDS
+The simple_shell supports the following commands
 
-- command Execution:
-  Enter any valid command to execute. The shell searches for the command in the user's
-  path and executes it if found.
+\- command Execution:
+Enter any valid command to execute. The shell searches for the command in the user's  path and executes it if found.
 
-- Environment Variables:
-  Entering the command 'env' displays the current environment variables.
+\- Environment Variables:
+Entering the command 'env' displays the current environment variables.
 
-EXIT STATUS:
-  The simple_shell returns the following exit statuses:
+.SH EXIT STATUS:
+The simple_shell returns the following exit statuses:
 
-  0 Successful execution.
+0 Successful execution.
 
-  1 General error (e.g., invalid command syntax).
+1 General error (e.g., invalid command syntax).
 
-  127 The specified command is not found in the path.
+127 The specified command is not found in the path.
 
-USAGE:
-    simple_shell can be used as a standard interactive shell or can execute
-    commands from a script file.
+SH. USAGE
+simple_shell can be used as a standard interactive shell or can execute commands from a script file.
 
- Interactive mode:
-   Run simple_shell without any arguments to enter interactive mode.
-   In this mode, you can enter commands, and the shell will execute
-   them one by one. To exit the interactive mode, use the 'exit' command.
+Interactive mode:
+Run simple_shell without any arguments to enter interactive mode. In this mode, you can enter commands, and the shell will execute them one by one. To exit the interactive mode, use the 'exit' command.
 
-   Example:
+Example:
      $ simple_shell
      $ ls -1
      ...
 
-  Script Mode:
-    You can pass a script file as an argument to simple_shell for batch execution
-    of commands. The script file should contain valid shell commands, each on a new line.
+Script Mode:
+You can pass a script file as an argument to simple_shell for batch execution of commands. The script file should contain valid shell commands, each on a new line.
 
-   Example:
+Example:
+.TP
      $ simple_shell script.sh
 
 EXAMPLES:
+.TP
       1. Execute a command:
          $ simple_shell ls -1
 
@@ -61,18 +57,18 @@ EXAMPLES:
       3. Run a script file:
          $ simple_shell myscript.sh
 
-AUTHORS:
+.SH AUTHORS:
        William herrera
        Elizabeth mendez
        Ladie juarbe
 
-REPORTING BUGS:
+.SH REPORTING BUGS:
     Report any bugs or issues to any of the following emails:
           eidaljuarbe@gmail.com
 	  elizabeth.zabala3@gmail.com
 	  titanbabrisa@gmail.com
 
-SEE ALSO:
+.SH SEE ALSO:
     For full documentation, visit github.com/zabalae/holbertonschool-simple_shell
 
 COPYRIGHT:
