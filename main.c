@@ -18,9 +18,12 @@ int main(int argc, char *argv[], char *envp[])
 		input = getInput();/*use getline for input*/
 		if (input != NULL)
 		{
-			if (strcmp(input, "exit") != 0)
+			if (strcasecmp(input, "exit") != 0)
 			{
-				execute(input, argv[0], envp);
+				if (strcmp(input, "env") != 0)
+					execute(input, argv[0], envp);
+				else
+					print_enviroment(envp);
 				free(input);
 			}
 			else
@@ -32,6 +35,5 @@ int main(int argc, char *argv[], char *envp[])
 		else
 			printf("Fail, NULL input");
 	} while (1);
-	/*free(input);*getline allocate memory, needs free*/
 	return (0);
 }
