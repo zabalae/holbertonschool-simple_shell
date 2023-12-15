@@ -25,7 +25,8 @@ char *getInput(void)
 	len = strlen(input);
 	if (len > 0 && input[len - 1] == '\n')
 		input[len - 1] = '\0';
-	return (input);
+	free(input);
+	return (NULL);
 }
 /**
 * execute - execute command base on usr input
@@ -70,7 +71,7 @@ void execute(char *cmd, char *self, char *envp[])
 		{
 			if (cmd_args[0] != NULL)
 			{
-				execve(cmd_args[0], cmd_args, envp);
+				execvp(cmd_args[0], cmd_args);
 				printf("%s: 1: %s: not found\n", self, cmd);
 				_exit(EXIT_FAILURE);
 			}
