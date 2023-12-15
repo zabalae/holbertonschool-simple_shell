@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
+#define ARGS_SIZE 259
+
 void execute(char *cmd, char *self, char *envp[]);
 char *getInput(void);
 void print_enviroment(char *envp[]);
