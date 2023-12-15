@@ -10,7 +10,7 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	int flag = 1;
-	char *input = NULL;
+	char *cmd = NULL;
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
@@ -18,30 +18,30 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			if (isatty(STDIN_FILENO))
 				printf("$ ");
-			input = getInput();/*use getline for input*/
-			flag = spaceChecker(input);
+			cmd = getInput();/*use getline for input*/
+			flag = spaceChecker(cmd);
 			if (flag == 1)
-				free(input);
+				free(cmd);
 		}
-		if (input != NULL)
+		if (cmd != NULL)
 		{
-			if (strcasecmp(input, "exit") != 0)
+			if (strstr(cmd, "exit") != NULL && strlen(cmd) > 4)
 			{
-				if (strcmp(input, "env") != 0)
-					execute(input, argv[0], envp);
-				else
-					print_enviroment(envp);
-				free(input);
+				free(cmd);
+				exit(2);
 			}
-			else if (strlen(input) == 4)
+			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
 			{
-				free(input);
+				free(cmd);
 				break;
 			}
 			else
 			{
-				free(input);
-				exit(2);
+				if (strcmp(cmd, "env") != 0)
+					execute(cmd, argv[0], envp);
+				else
+					print_enviroment(envp);
+				free(cmd);
 			}
 		}
 		else
