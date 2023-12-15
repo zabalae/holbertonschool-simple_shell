@@ -35,7 +35,7 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-void execute(char *cmd, char *self, char *envp[])
+void execute(char *cmd, char *envp[])
 {
 	int i = 0;
 	char *cmd_args[ARGS_SIZE];
