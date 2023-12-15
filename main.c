@@ -36,7 +36,7 @@ int main(int argc, char *argv[], char *envp[])
 			else
 			{
 				free(input);
-				break;
+				exit(2);
 			}
 		}
 		else
