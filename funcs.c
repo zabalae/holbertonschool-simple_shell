@@ -25,7 +25,6 @@ char *getInput(void)
 	len = strlen(input);
 	if (len > 0 && input[len - 1] == '\n')
 		input[len - 1] = '\0';
-	free(input);
 	return (input);
 }
 /**
