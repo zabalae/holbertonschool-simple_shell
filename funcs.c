@@ -72,7 +72,7 @@ void execute(char *cmd, char *self, char *envp[])
 		}
 	}
 	else
-		printf("%s: 1: %s: not found\n", self, cmd);
+		dprintf(2, "%s: 1: %s: not found\n", self, cmd);
 }
 /**
 * print_enviroment - for env command enviroment
