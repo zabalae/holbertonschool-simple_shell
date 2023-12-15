@@ -74,8 +74,7 @@ void execute(char *cmd, char *self, char *envp[])
 	{
 		fprintf(stderr, "%s: 1: %s: not found\n", self, cmd);
 		free(cmd);
-		/*exit(127);*/
-		exit(1);
+		exit(127);
 	}
 }
 /**
