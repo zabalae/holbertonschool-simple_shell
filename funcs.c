@@ -7,7 +7,7 @@
 char *getInput(void)
 {
 	char *input = NULL;
-	size_t size = 0, len, x, allSpaces = 1;
+	size_t size = 0, len;
 	ssize_t errCheck;
 
 	errCheck = getline(&input, &size, stdin);
@@ -26,20 +26,6 @@ char *getInput(void)
 	if (len > 0 && input[len - 1] == '\n')
 		input[len - 1] = '\0';
 
-	for (x = 0; x < len; x++)
-	{
-		if (input[x] != ' ')
-		{
-			allSpaces = 0;
-			break;
-		}
-	}
-
-	if (allSpaces || len == 0)
-	{
-		free(input);
-		return (NULL);
-	}
 	return (input);
 }
 /**
