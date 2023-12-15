@@ -31,7 +31,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else
 			printf("Fail, NULL input");
-		if (input != NULL)
+		if (input == NULL)
 		{
 			free(input);
 		}
