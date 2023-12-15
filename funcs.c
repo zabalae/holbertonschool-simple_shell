@@ -17,8 +17,10 @@ char *getInput(void)
 		if (isatty(STDIN_FILENO))
 		{
 			perror("getline");
+			free(input);
 			return (NULL);
 		}
+		free(input);
 		exit(EXIT_SUCCESS);
 	}
 	len = strlen(input);
@@ -51,7 +53,7 @@ void execute(char *cmd, char *self, char *envp[])
 		while (cmd_args[i] != NULL)
 		{
 			i++;
-			if (i >= 258)
+			if (i >= ARGS_SIZE - 1)
 			{
 				printf("Command Fail, Too many arguments. Max 258.\n");
 				return;
@@ -69,9 +71,8 @@ void execute(char *cmd, char *self, char *envp[])
 		{
 			if (cmd_args[0] != NULL)
 			{
-				execve(cmd_args[0], cmd_args, envp);
-				printf("%s: 1: %s: not found\n", self, cmd);
-				fflush(stdout);
+				execvp(cmd_args[0], cmd_args);
+				perror("execvp");
 				_exit(EXIT_FAILURE);
 			}
 			_exit(EXIT_FAILURE);
