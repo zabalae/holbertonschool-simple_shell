@@ -9,13 +9,20 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
+	int flag = 1;
 	char *input = NULL;
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
-		if (isatty(STDIN_FILENO))
-			printf("$ ");
-		input = getInput();/*use getline for input*/
+		while (flag == 1)
+		{
+			if (isatty(STDIN_FILENO))
+				printf("$ ");
+			input = getInput();/*use getline for input*/
+			flag = spaceChecker(input);
+			if (flag == 1)
+				free(input);
+		}
 		if (input != NULL)
 		{
 			if (strcasecmp(input, "exit") != 0)
@@ -34,6 +41,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		else
 			printf("Fail, NULL input");
+		flag = 1;
 	} while (1);
 	return (0);
 }
