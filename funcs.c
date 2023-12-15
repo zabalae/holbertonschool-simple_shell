@@ -25,7 +25,6 @@ char *getInput(void)
 	len = strlen(input);
 	if (len > 0 && input[len - 1] == '\n')
 		input[len - 1] = '\0';
-
 	return (input);
 }
 /**
@@ -39,28 +38,18 @@ char *getInput(void)
 void execute(char *cmd, char *self, char *envp[])
 {
 	int i = 0;
-	char *cmd_args[ARGS_SIZE];
+	char *cmd_args[ARGS_SIZE], *path_check;
 	pid_t pid;
 
-	if (strcmp(cmd, "env") == 0)
+	cmd_args[0] = strtok(cmd, " ");
+	while (cmd_args[i] != NULL && i < ARGS_SIZE - 1)
 	{
-		print_enviroment(envp);
-		return;
+		i++;
+		cmd_args[i] = strtok(NULL, " ");
 	}
-	else
+	path_check = validCommand(cmd_args[0]);
+	if (path_check != NULL)
 	{
-		cmd_args[i] = strtok(cmd, " ");
-		while (cmd_args[i] != NULL)
-		{
-			i++;
-			if (i >= ARGS_SIZE - 1)
-			{
-				printf("Command Fail, Too many arguments. Max 258.\n");
-				return;
-			}
-			cmd_args[i] = strtok(NULL, " ");
-		}
-
 		pid = fork();
 		if (pid == -1)
 		{
@@ -69,17 +58,18 @@ void execute(char *cmd, char *self, char *envp[])
 		}
 		if (pid == 0)/*child process*/
 		{
-			if (cmd_args[0] != NULL)
-			{
-				execvp(cmd_args[0], cmd_args);
-				printf("%s: 1: %s: not found\n", self, cmd);
-				_exit(EXIT_FAILURE);
-			}
+			execve(path_check, cmd_args, envp);
+			free(path_check);
 			_exit(EXIT_FAILURE);
 		}
 		else
+		{
 			wait(NULL);
+			free(path_check);
+		}
 	}
+	else
+		printf("%s: 1: %s: not found\n", self, cmd);
 }
 /**
 * print_enviroment - for env command enviroment
@@ -95,4 +85,40 @@ void print_enviroment(char *envp[])
 	{
 		printf("%s\n", envp[i]);
 	}
+}
+/**
+ * validCommand - search whole path comparing commands
+ * @cmd: user input to compare
+ *
+ * Return: the path if its found or NULL if not
+ */
+char *validCommand(char *cmd)
+{
+	char *path = getenv("PATH"), *token, *cmd_path, *path_cpy = NULL;
+
+	if (path != NULL)
+	{
+		path_cpy = strdup(path);
+		if (path_cpy == NULL)
+			exit(EXIT_FAILURE);
+		token = strtok(path_cpy, ":");
+		while (token != NULL)
+		{
+			cmd_path = malloc(PATH_MAX);
+			if (cmd_path == NULL)
+			{
+				return (NULL);
+			}
+			snprintf(cmd_path, PATH_MAX, "%s/%s", token, cmd);
+			if (access(cmd_path, X_OK) == 0)
+			{
+				free(path_cpy);
+				return (cmd_path);
+			}
+			free(cmd_path);
+			token = strtok(NULL, ":");
+		}
+	}
+	free(path_cpy);
+	return (NULL);
 }
