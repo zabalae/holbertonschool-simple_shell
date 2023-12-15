@@ -37,9 +37,9 @@ char *getInput(void)
 */
 void execute(char *cmd, char *self, char *envp[])
 {
-	int i = 0;
+	int i = 0, stat;
 	char *cmd_args[ARGS_SIZE], *path_check;
-	pid_t pid;
+	pid_t pid, check;
 
 	cmd_args[0] = strtok(cmd, " ");
 	if (cmd_args[0] != NULL)
@@ -55,21 +55,20 @@ void execute(char *cmd, char *self, char *envp[])
 	{
 		pid = fork();
 		if (pid == -1)
-		{
-			perror("fork");
 			exit(EXIT_FAILURE);
-		}
 		if (pid == 0)/*child process*/
 		{
 			execve(path_check, cmd_args, envp);
 			free(path_check);
 			exit(2);
 		}
-		else
+		check = waitpid(pid, &stat, 0);
+		if (check == -1)
 		{
-			wait(NULL);
 			free(path_check);
+			exit(2);
 		}
+		free(path_check);
 	}
 	else
 	{
