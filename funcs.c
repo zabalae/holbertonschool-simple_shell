@@ -26,7 +26,7 @@ char *getInput(void)
 	if (len > 0 && input[len - 1] == '\n')
 		input[len - 1] = '\0';
 	free(input);
-	return (NULL);
+	return (input);
 }
 /**
 * execute - execute command base on usr input
