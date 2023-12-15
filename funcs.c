@@ -70,7 +70,7 @@ void execute(char *cmd, char *self, char *envp[])
 		{
 			if (cmd_args[0] != NULL)
 			{
-				execvp(cmd_args[0], cmd_args);
+				execve(cmd_args[0], cmd_args, envp);
 				printf("%s: 1: %s: not found\n", self, cmd);
 				_exit(EXIT_FAILURE);
 			}
