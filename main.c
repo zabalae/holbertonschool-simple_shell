@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	int flag = 1;
+	int flag = 1, len;
 	char *cmd = NULL;
 	(void)argc;
 
@@ -25,7 +25,8 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		if (cmd != NULL)
 		{
-			if (strstr(cmd, "exit") != NULL && strlen(cmd) > 4)
+			len = strlen(cmd);
+			if (len >= 4 && strcmp(cmd + len - 4, "exit") == 0)
 			{
 				free(cmd);
 				exit(2);
@@ -44,8 +45,6 @@ int main(int argc, char *argv[], char *envp[])
 				free(cmd);
 			}
 		}
-		else
-			printf("Fail, NULL input");
 		flag = 1;
 	} while (1);
 	return (0);
