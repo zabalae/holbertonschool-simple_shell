@@ -72,7 +72,11 @@ void execute(char *cmd, char *self, char *envp[])
 		}
 	}
 	else
+	{
 		fprintf(stderr, "%s: 1: %s: not found\n", self, cmd);
+		free(cmd);
+		exit(EXIT_FAILURE);
+	}
 }
 /**
 * print_enviroment - for env command enviroment
