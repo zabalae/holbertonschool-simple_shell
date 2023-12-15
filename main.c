@@ -10,6 +10,7 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	char *input = NULL;
+	char *default_path = "/usr/bin:/bin";
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
@@ -20,6 +21,10 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			if (strcmp(input, "exit") != 0)
 			{
+				if (strlen(getenv("PATH")) == 0)
+				{
+					setenv("PATH", default_path, 1);
+				}
 				execute(input, argv[0], envp);
 				free(input);
 			}
