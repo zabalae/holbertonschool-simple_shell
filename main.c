@@ -9,20 +9,43 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	char *input = NULL, *prevInput = NULL;
+	int flag = 1, len;
+	char *cmd = NULL;
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
-		if (isatty(STDIN_FILENO))
-			printf("$ ");
-		input = getInput();/*use getline for input*/
-		if (strcmp(input, "exit") != 0)
+		while (flag == 1)
 		{
-			execute(input, argv[0], envp);
+			if (isatty(STDIN_FILENO))
+				printf("$ ");
+			cmd = getInput();/*use getline for input*/
+			flag = spaceChecker(cmd);
+			if (flag == 1)
+				free(cmd);
 		}
-		free(prevInput);/*deals with leaks*/
-		prevInput = input;
-	} while (strcmp(input, "exit") != 0);
-	free(input);/*getline allocate memory, needs free*/
+		if (cmd != NULL)
+		{
+			len = strlen(cmd);
+			if (len >= 4 && strcmp(cmd + len - 4, "exit") == 0)
+			{
+				free(cmd);
+				exit(2);
+			}
+			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
+			{
+				free(cmd);
+				break;
+			}
+			else
+			{
+				if (strcmp(cmd, "env") != 0)
+					execute(cmd, argv[0], envp);
+				else
+					print_enviroment(envp);
+				free(cmd);
+			}
+		}
+		flag = 1;
+	} while (1);
 	return (0);
 }
