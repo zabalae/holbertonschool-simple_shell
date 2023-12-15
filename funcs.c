@@ -35,7 +35,7 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-void execute(char *cmd, char *envp[])
+void execute(char *cmd, char *self, char *envp[])
 {
 	int i = 0;
 	char *cmd_args[ARGS_SIZE];
@@ -71,7 +71,7 @@ void execute(char *cmd, char *envp[])
 			if (cmd_args[0] != NULL)
 			{
 				execvp(cmd_args[0], cmd_args);
-				perror("execvp");
+				printf("%s: 1: %s: not found\n", self, cmd);
 				_exit(EXIT_FAILURE);
 			}
 			_exit(EXIT_FAILURE);
