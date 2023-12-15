@@ -9,29 +9,43 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	char *input = NULL;
+	int flag = 1, len;
+	char *cmd = NULL;
 	(void)argc;
 
 	do {/*infinit loop till exit is input*/
-		if (isatty(STDIN_FILENO))
-			printf("$ ");
-		input = getInput();/*use getline for input*/
-		if (input != NULL)
+		while (flag == 1)
 		{
-			if (strcmp(input, "exit") != 0)
+			if (isatty(STDIN_FILENO))
+				printf("$ ");
+			cmd = getInput();/*use getline for input*/
+			flag = spaceChecker(cmd);
+			if (flag == 1)
+				free(cmd);
+		}
+		if (cmd != NULL)
+		{
+			len = strlen(cmd);
+			if (len >= 4 && strcmp(cmd + len - 4, "exit") == 0)
 			{
-				execute(input, argv[0], envp);
-				free(input);
+				free(cmd);
+				exit(2);
+			}
+			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
+			{
+				free(cmd);
+				break;
 			}
 			else
 			{
-				free(input);
-				break;
+				if (strcmp(cmd, "env") != 0)
+					execute(cmd, argv[0], envp);
+				else
+					print_enviroment(envp);
+				free(cmd);
 			}
 		}
-		else
-			printf("Fail, NULL input");
+		flag = 1;
 	} while (1);
-	/*free(input);*getline allocate memory, needs free*/
 	return (0);
 }
