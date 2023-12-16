@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	int flag = 1, len;
+	int flag = 1, executes = 0;
 	char *cmd = NULL;
 	(void)argc;
 
@@ -25,15 +25,11 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		if (cmd != NULL)
 		{
-			len = strlen(cmd);
-			if (len >= 4 && strcmp(cmd + len - 4, "exit") == 0)
+			if (strcasecmp(cmd, "exit") == 0)
 			{
 				free(cmd);
-				exit(2);
-			}
-			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
-			{
-				free(cmd);
+				if (executes > 0)
+					exit(2);
 				break;
 			}
 			else
@@ -45,6 +41,7 @@ int main(int argc, char *argv[], char *envp[])
 				free(cmd);
 			}
 		}
+		executes++;
 		flag = 1;
 	} while (1);
 	return (0);
