@@ -35,9 +35,9 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-int execute(char *cmd, char *self, char *envp[])
+void execute(char *cmd, char *self, char *envp[])
 {
-	int i = 0, status = 0;
+	int i = 0;
 	char *cmd_args[ARGS_SIZE], *path_check;
 	pid_t pid;
 
@@ -65,10 +65,8 @@ int execute(char *cmd, char *self, char *envp[])
 		else/*main proccess*/
 		{
 			wait(NULL);
-			if (strcasecmp(cmd_args[i - 1], "exit") == 0)
-				status = 2;
 			free(path_check);
-			return (status);
+			return;
 		}
 	}
 	else
