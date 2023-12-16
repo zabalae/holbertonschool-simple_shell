@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	int flag = 1, len;
+	int flag = 1, status = 0;
 	char *cmd = NULL;
 	(void)argc;
 
@@ -25,13 +25,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		if (cmd != NULL)
 		{
-			len = strlen(cmd);
-			if (len >= 4 && strcmp(cmd + len - 4, "exit") == 0)
-			{
-				free(cmd);
-				exit(2);
-			}
-			if (strcasecmp(cmd, "exit") == 0 && strlen(cmd) == 4)
+			if (strcasecmp(cmd, "exit") == 0)
 			{
 				free(cmd);
 				break;
@@ -39,9 +33,14 @@ int main(int argc, char *argv[], char *envp[])
 			else
 			{
 				if (strcmp(cmd, "env") != 0)
-					execute(cmd, argv[0], envp);
+					status = execute(cmd, argv[0], envp);
 				else
 					print_enviroment(envp);
+				if (status == 2)
+				{
+					free(cmd);
+					exit(status);
+				}
 				free(cmd);
 			}
 		}

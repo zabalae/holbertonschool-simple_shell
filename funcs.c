@@ -35,11 +35,11 @@ char *getInput(void)
 *
 * Return: void, doesnt return
 */
-void execute(char *cmd, char *self, char *envp[])
+int execute(char *cmd, char *self, char *envp[])
 {
-	int i = 0, stat;
+	int i = 0, status = 0;
 	char *cmd_args[ARGS_SIZE], *path_check;
-	pid_t pid, check;
+	pid_t pid;
 
 	cmd_args[0] = strtok(cmd, " ");
 	if (cmd_args[0] != NULL)
@@ -62,13 +62,14 @@ void execute(char *cmd, char *self, char *envp[])
 			free(path_check);
 			exit(2);
 		}
-		check = waitpid(pid, &stat, 0);
-		if (check == -1)
+		else/*main proccess*/
 		{
+			wait(NULL);
+			if (strcasecmp(cmd_args[i - 1], "exit") == 0)
+				status = 2;
 			free(path_check);
-			exit(2);
+			return (status);
 		}
-		free(path_check);
 	}
 	else
 	{
