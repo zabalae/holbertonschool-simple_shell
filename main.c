@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[], char *envp[])
 {
-	int flag = 1, status = 0;
+	int flag = 1, executes = 0;
 	char *cmd = NULL;
 	(void)argc;
 
@@ -28,22 +28,20 @@ int main(int argc, char *argv[], char *envp[])
 			if (strcasecmp(cmd, "exit") == 0)
 			{
 				free(cmd);
+				if (executes > 0)
+					exit(2);
 				break;
 			}
 			else
 			{
 				if (strcmp(cmd, "env") != 0)
-					status = execute(cmd, argv[0], envp);
+					execute(cmd, argv[0], envp);
 				else
 					print_enviroment(envp);
-				if (status == 2)
-				{
-					free(cmd);
-					exit(status);
-				}
 				free(cmd);
 			}
 		}
+		executes++;
 		flag = 1;
 	} while (1);
 	return (0);
