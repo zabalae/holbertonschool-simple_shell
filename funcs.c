@@ -115,7 +115,7 @@ char *validCommand(char *cmd)
 		path_cpy = strdup(path);
 		if (path_cpy == NULL)/*memory allocation check*/
 			exit(EXIT_FAILURE);
-		token = strtok(path_cpy, ":");/*path look like: usr/bin/ls:*/
+		token = strtok(path_cpy, ":");/*path look like: usr/bin:*/
 		while (token != NULL)
 		{
 			cmd_path = malloc(PATH_MAX);
